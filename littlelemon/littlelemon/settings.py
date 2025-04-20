@@ -104,12 +104,12 @@ WSGI_APPLICATION = 'littlelemon.wsgi.application'
 
 DATABASES = {
         'default': {
-            'ENGINE': os.environ.get('DATABASE_ENGINE'),
+            'ENGINE': os.environ.get('DATABASE_ENGINE', "django.db.backends.postgresql"),
             'NAME': os.environ.get('DATABASE_NAME'),
             'USER': os.environ.get('DATABASE_USER'),
             'PASSWORD': os.environ.get('DATABASE_PASSWORD'),    
             'HOST': os.environ.get('DATABASE_HOST'), # For local development, use 'localhost' or '127.0.0.1'
-            'PORT': os.environ.get('DATABASE_PORT'), # Default PostgreSQL port is usually '5432'
+            'PORT': os.environ.get('DATABASE_PORT', 5432), # Default PostgreSQL port is usually '5432'
             'TEST': {
                 'NAME': 'test_db',  # Separate test database
             },
@@ -180,7 +180,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = os.environ.get('STATIC_URL')
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 # Default primary key field type
