@@ -1,6 +1,6 @@
 http://localhost {
 
-	# Serve static files from ./staticfiles/
+	# Serve static files from ./staticfiles/ | in AWS from Cloudfront CDN
 	handle_path /static/* {
 		root * /srv/static
 		file_server

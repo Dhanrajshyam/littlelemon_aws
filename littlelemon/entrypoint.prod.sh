@@ -1,12 +1,11 @@
 #!/usr/bin/env bash
-set -e  # Exit on any error
+
+# Exit on any error
+set -e  
 
 echo "Running Django migrations..."
 python manage.py makemigrations --noinput
 python manage.py migrate --noinput
-
-echo "Collecting static files..."
-python manage.py collectstatic --noinput
 
 echo "Creating superuser..."
 python manage.py shell << EOF
@@ -19,4 +18,4 @@ if not User.objects.filter(email=email).exists():
 EOF
 
 echo "Starting Gunicorn..."
-exec gunicorn Littlelemon.wsgi:application --bind 0.0.0.0:8000 --workers 3
+exec gunicorn littlelemon.wsgi:application --bind 0.0.0.0:8000 --workers 2
